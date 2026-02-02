@@ -1,0 +1,8 @@
+# Copy this file to .dev.vars and fill in your values
+# This file should NOT be committed to version control
+
+# Last.fm API key - get one at https://www.last.fm/api/account/create
+LASTFM_API_KEY=your-lastfm-api-key-here
+
+# Your Last.fm username
+LASTFM_USERNAME=your-lastfm-username
