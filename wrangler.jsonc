@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lastfm-tracker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-30",
+  "compatibility_flags": ["nodejs_compat"],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "LASTFM_TRACKER",
+        "class_name": "LastFmTracker"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["LastFmTracker"]
+    }
+  ]
+}
