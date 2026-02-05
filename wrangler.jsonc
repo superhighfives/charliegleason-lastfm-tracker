@@ -1,3 +1,16 @@
+/**
+ * Wrangler configuration for the Last.fm tracker Durable Object.
+ *
+ * WHAT GOES WHERE:
+ * - Bindings (Durable Objects) → here in wrangler.jsonc (committed to git)
+ * - Non-secret config → here under "vars" (committed to git)
+ * - Secrets (LASTFM_API_KEY, LASTFM_USERNAME) → `wrangler secret put` (stored in Cloudflare, NOT in git)
+ * - Local secrets → .dev.vars file (gitignored)
+ *
+ * To set production secrets:
+ *   pnpm wrangler secret put LASTFM_API_KEY
+ *   pnpm wrangler secret put LASTFM_USERNAME
+ */
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "lastfm-tracker",
