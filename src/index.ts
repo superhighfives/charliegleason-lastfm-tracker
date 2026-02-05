@@ -192,13 +192,33 @@ export class LastFmTracker extends DurableObject<Env> {
 }
 
 /**
- * Worker entry point - required but not used directly.
- * The DO is accessed via service binding from the main app.
+ * Worker entry point - handles direct WebSocket connections.
+ * Routes requests to a single global LastFmTracker DO instance.
  */
 export default {
-  async fetch(_request: Request, _env: Env): Promise<Response> {
-    return new Response("Last.fm tracker worker. Access via service binding.", {
-      status: 200,
-    });
+  async fetch(request: Request, env: Env): Promise<Response> {
+    // Handle CORS preflight
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, OPTIONS",
+          "Access-Control-Allow-Headers": "Upgrade, Connection",
+        },
+      });
+    }
+
+    // Route to the global DO instance
+    const id = env.LASTFM_TRACKER.idFromName("global");
+    const stub = env.LASTFM_TRACKER.get(id);
+
+    // Forward the request to the DO
+    const response = await stub.fetch(request);
+
+    // Add CORS headers to the response
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.set("Access-Control-Allow-Origin", "*");
+
+    return newResponse;
   },
 };
