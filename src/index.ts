@@ -76,7 +76,7 @@ export class LastFmTracker extends DurableObject<Env> {
    */
   async webSocketMessage(
     ws: WebSocket,
-    message: string | ArrayBuffer
+    message: string | ArrayBuffer,
   ): Promise<void> {
     // Clients can send "ping" to get current track
     if (message === "ping") {
@@ -91,7 +91,7 @@ export class LastFmTracker extends DurableObject<Env> {
     ws: WebSocket,
     code: number,
     reason: string,
-    _wasClean: boolean
+    _wasClean: boolean,
   ): Promise<void> {
     ws.close(code, reason);
   }
