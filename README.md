@@ -74,3 +74,4 @@ ws.send("ping");
 
 - [charliegleason.com](https://github.com/superhighfives/charliegleason.com) - Main site that uses this
 - [visitor-counter](https://github.com/superhighfives/visitor-counter) - Companion Durable Object for visitor tracking
+- [charliegleason.com-private](https://github.com/superhighfives/charliegleason.com-private) - Template for password-protected routes
