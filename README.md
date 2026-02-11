@@ -73,5 +73,5 @@ ws.send("ping");
 ## Related
 
 - [charliegleason.com](https://github.com/superhighfives/charliegleason.com) - Main site that uses this
-- [visitor-counter](https://github.com/superhighfives/visitor-counter) - Companion Durable Object for visitor tracking
-- [charliegleason.com-private](https://github.com/superhighfives/charliegleason.com-private) - Template for password-protected routes
+- [charliegleason-visitor-counter](https://github.com/superhighfives/charliegleason-visitor-counter) - Companion Durable Object for visitor tracking
+- [charliegleason-private-content](https://github.com/superhighfives/charliegleason-private-content) - Template for password-protected routes
