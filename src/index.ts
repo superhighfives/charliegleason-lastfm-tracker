@@ -48,7 +48,16 @@ export class LastFmTracker extends DurableObject<Env> {
   async fetch(request: Request): Promise<Response> {
     const upgradeHeader = request.headers.get("Upgrade");
     if (upgradeHeader !== "websocket") {
-      return new Response("Expected WebSocket", { status: 426 });
+      // Non-WebSocket request: return the current track as JSON. Used by
+      // clients that poll over plain HTTP (e.g. the SSH terminal, whose
+      // runtime can't complete a WebSocket upgrade against Cloudflare).
+      // ensureAlarm keeps polling alive so the snapshot stays fresh even with
+      // no WebSocket subscribers.
+      await this.ensureAlarm();
+      return Response.json(
+        { track: this.currentTrack },
+        { headers: { "Access-Control-Allow-Origin": "*" } },
+      );
     }
 
     const webSocketPair = new WebSocketPair();
